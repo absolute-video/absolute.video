@@ -25,3 +25,5 @@ EXPOSE 8080
 # Run the executable
 CMD ["./main"]
 
+# build the image wiith this command
+# docker build -t go-ffmpeg .
