@@ -10,11 +10,8 @@ COPY . .
 # Download all the dependencies
 RUN go mod download
 
-#add ffmpeg
-RUN apk add --no-cache ffmpeg
-
-# install make
-RUN apk add --no-cache make
+# Install ffmpeg
+RUN apt-get update && apt-get install -y ffmpeg
 
 # make the build
 RUN go build -o main cmd/api/main.go
