@@ -1,8 +1,9 @@
 package main
 
 import (
-	"absoute.video/internal/server"
 	"fmt"
+
+	"absolute.video/internal/server"
 )
 
 func main() {

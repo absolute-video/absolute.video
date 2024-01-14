@@ -1,4 +1,4 @@
-# Project absoute.video
+# Project absolute.video
 
 One Paragraph of project description goes here
 

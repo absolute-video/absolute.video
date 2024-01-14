@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"absoute.video/internal/database"
+	"absolute.video/internal/database"
 	_ "github.com/joho/godotenv/autoload"
 )
 
