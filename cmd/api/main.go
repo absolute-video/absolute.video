@@ -1,7 +1,7 @@
 package main
 
 import (
-	"absolute/internal/server"
+	"absoute.video/internal/server"
 	"fmt"
 )
 

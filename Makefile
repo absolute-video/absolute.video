@@ -40,7 +40,7 @@ clean:
 	@rm -f main
 
 # Live Reload
-watch:
+dev:
 	@if command -v air > /dev/null; then \
 	    air; \
 	    echo "Watching...";\

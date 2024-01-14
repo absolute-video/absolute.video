@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"absolute/internal/server"
+	"absoute.video/internal/server"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"net/http/httptest"
