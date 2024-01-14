@@ -13,7 +13,7 @@ run:
 
 # Create DB container
 docker-run:
-	@if docker compose up 2>/dev/null; then \
+	@if docker compose -f docker-compose.postgres.yml up 2>/dev/null; then \
 		: ; \
 	else \
 		echo "Falling back to Docker Compose V1"; \
