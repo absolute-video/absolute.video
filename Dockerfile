@@ -1,5 +1,5 @@
 # start with ubuntu based go image
-FROM golang:1.14.2-alpine3.11
+FROM golang:1.21
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -23,7 +23,7 @@ RUN go build -o main cmd/api/main.go
 EXPOSE 8080
 
 # Run the executable
-CMD ["./main"]
+CMD ["main"]
 
 # build the image wiith this command
 # docker build -t go-ffmpeg .
