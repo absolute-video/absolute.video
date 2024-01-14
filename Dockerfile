@@ -17,7 +17,7 @@ RUN apk add --no-cache ffmpeg
 RUN apk add --no-cache make
 
 # make the build
-RUN make build
+RUN go build -o main cmd/api/main.go
 
 # This container exposes port 8080 to the outside world
 EXPOSE 8080
