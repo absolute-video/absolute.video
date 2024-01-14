@@ -11,7 +11,7 @@ env:
   REGION: asia-south2
   GAR_LOC: asia-south2-docker.pkg.dev/absolute-video/absolute-video-reg
 
-job:
+jobs:
   build-push-artifact:
     runs-on: ubuntu-latest
     steps:
