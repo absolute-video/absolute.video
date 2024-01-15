@@ -18,27 +18,23 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@v3"
       
-      - id: "auth"
-        uses: "google-github-actions/auth@v1"
-        with:
-          credentials_json: "${{ secrets.GCP_SA_KEY_JSON }}"
 
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
+    - name: Setup gcloud
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '290.0.1'
+        service_account_key: ${{ secrets.GCP_SA_KEY_JSON }} 
+        project_id: ${{ secrets.GCP_PROJECT_ID }} 
 
-      - name: "Use gcloud CLI"
-        run: "gcloud info"
+    - name: Configure docker for GCP
+      run: gcloud auth configure-docker
 
-      - name: "Docker auth"
-        run: |-
-          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+    - name: Build docker image
+      run:  docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest . 
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag ${{ env.GAR_LOC }}
-        working-directory: ./
+    - name: Push to Google Container Registry
+      run:  docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest 
 
-      - name: Push image
-        run: docker push ${{ env.GAR_LOC }}
   deploy-cloud-run:
     needs: build-push-artifact
     runs-on: ubuntu-latest

@@ -1,6 +1,10 @@
 # start with ubuntu based go image
 FROM golang:1.21
 
+
+# Install ffmpeg
+RUN apt-get update && apt-get install -y ffmpeg
+
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
@@ -10,8 +14,6 @@ COPY . .
 # Download all the dependencies
 RUN go mod download
 
-# Install ffmpeg
-RUN apt-get update && apt-get install -y ffmpeg
 
 # make the build
 RUN go build -o main cmd/api/main.go
