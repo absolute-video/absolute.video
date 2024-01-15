@@ -18,13 +18,16 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@v3"
       
-      - name: Setup gcloud
-        uses: google-github-actions/setup-gcloud@main
+      - id: "auth"
+        uses: "google-github-actions/auth@v1"
         with:
-          version: '290.0.1'
-          service_account_key: ${{ secrets.GCP_SA_KEY_JSON }} 
-          project_id: ${{ secrets.GCP_PROJECT_ID }} 
+          credentials_json: "${{ secrets.GCP_SA_KEY_JSON }}"
 
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }} 
+      
       - name: Configure docker for GCP
         run: gcloud auth configure-docker
 
