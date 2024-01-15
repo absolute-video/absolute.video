@@ -58,7 +58,7 @@ jobs:
       - name: "Deploy to Cloud Run"
         run: |-
           gcloud run deploy absolute-video \
-            --image ${{ env.GAR_LOC }} \
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest \
             --platform managed \
             --region ${{ env.REGION }} \
             --allow-unauthenticated \
