@@ -22,7 +22,7 @@ RUN go build -o main cmd/api/main.go
 EXPOSE 8080
 
 # Run the executable
-CMD ["main"]
+CMD ["./main"]
 
 # build the image wiith this command
 # docker build -t go-ffmpeg .
