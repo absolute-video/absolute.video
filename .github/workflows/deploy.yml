@@ -18,22 +18,21 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@v3"
       
+      - name: Setup gcloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '290.0.1'
+          service_account_key: ${{ secrets.GCP_SA_KEY_JSON }} 
+          project_id: ${{ secrets.GCP_PROJECT_ID }} 
 
-    - name: Setup gcloud
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '290.0.1'
-        service_account_key: ${{ secrets.GCP_SA_KEY_JSON }} 
-        project_id: ${{ secrets.GCP_PROJECT_ID }} 
+      - name: Configure docker for GCP
+        run: gcloud auth configure-docker
 
-    - name: Configure docker for GCP
-      run: gcloud auth configure-docker
+      - name: Build docker image
+        run:  docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest . 
 
-    - name: Build docker image
-      run:  docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest . 
-
-    - name: Push to Google Container Registry
-      run:  docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest 
+      - name: Push to Google Container Registry
+        run:  docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest 
 
   deploy-cloud-run:
     needs: build-push-artifact
