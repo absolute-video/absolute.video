@@ -26,12 +26,18 @@ jobs:
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }} 
+          project_id: ${{ secrets.GCP_SA_KEY_JSON }} 
       
       - name: Configure docker for GCP
         run: gcloud auth configure-docker
+      
+      - name: Rebuild env from guthub secrets
+        run: echo ${{ secrets.ENV }} > .env
 
-      - name: Build docker image
+      - name: Rebuild security from guthub secrets
+        run: echo ${{ secrets.GCP_PROJECT_ID }} > security.json 
+
+      - name: Build docker image 
         run:  docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/absolute:latest . 
 
       - name: Push to Google Container Registry

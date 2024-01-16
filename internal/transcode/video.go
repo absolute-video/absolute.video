@@ -11,6 +11,7 @@ import (
 
 	"cloud.google.com/go/storage"
 	ffmpeg "github.com/u2takey/ffmpeg-go"
+	"google.golang.org/api/option"
 )
 
 type Stream struct {
@@ -135,7 +136,7 @@ func TranscodeVideo(path string, transcodableSizes []TranscodeSize) ([]Transcode
 func UploadEachVideoToGoogleStorage(path string,object string)( string, error ){
 	ctx:= context.Background()
 
-	client, err := storage.NewClient(ctx)
+	client, err := storage.NewClient(ctx,option.WithCredentialsFile("security.json"))
 	if err != nil {
 		fmt.Println(err)
 		return "", err
