@@ -1,7 +1,6 @@
 package videoUploader
 
 import (
-	"fmt"
 	"net/http"
 
 	"absolute.video/internal/transcode"
