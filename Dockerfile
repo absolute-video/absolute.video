@@ -18,6 +18,10 @@ RUN go mod download
 # make the build
 RUN go build -o main cmd/api/main.go
 
+RUN mkdir /app/tmp
+RUN mkdir /app/tmp/converted
+RUN mkdir /app/tmp/uploaded
+
 # This container exposes port 8080 to the outside world
 EXPOSE 8080
 

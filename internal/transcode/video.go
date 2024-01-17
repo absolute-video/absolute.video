@@ -82,7 +82,7 @@ func GetVideoInfo(path string) (VideoData, error) {
 		return VideoData{}, err
 	}
 
-	fmt.Println(info)
+	// fmt.Println(info)
 	var data VideoData
 	err = json.Unmarshal([]byte(info), &data)
 
@@ -97,7 +97,7 @@ func TransCodeEachVideo(path string,size  TranscodeSize,transcodedVideoPath chan
 	err := ffmpeg.Input(path).
 		Output(ontputPath,
 		ffmpeg.KwArgs{"vf": fmt.Sprintf("scale=w=%d:h=%d",widht,height)}).
-		OverWriteOutput().ErrorToStdOut().Run()
+		OverWriteOutput().Run()
 			
 	if err != nil {
 		transcodedVideoPath <-  TranscodedVideoPath{"",size}

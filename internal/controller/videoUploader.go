@@ -22,7 +22,7 @@ func VideoHandler(c *gin.Context) {
 	
 
 	pathName := "tmp/uploaded/"+file.Filename
-	fmt.Println(pathName)
+	// fmt.Println(pathName)
 	err = c.SaveUploadedFile(file,pathName)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
